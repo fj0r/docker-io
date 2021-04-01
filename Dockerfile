@@ -22,7 +22,7 @@ RUN set -eux \
     apt-get install -y --no-install-recommends \
       locales tzdata sudo ca-certificates pwgen \
       openssh-client openssh-server gnupg rsync \
-      inetutils-ping net-tools iproute2 iptables \
+      inetutils-ping net-tools iproute2 nftables \
       mlocate htop procps xz-utils zstd zip unzip tree \
       zsh git curl wget tcpdump socat jq build-essential \
       python3 python3-dev python3-pip python3-setuptools ipython3 \
