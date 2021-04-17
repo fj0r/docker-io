@@ -80,7 +80,7 @@ RUN set -ex \
 RUN set -eux \
   ; cfg_home=/etc/skel \
   ; mkdir $cfg_home/.zshrc.d \
-  ; git clone --depth=1 https://github.com/murphil/.zshrc.d.git $cfg_home/.zshrc.d \
+  ; git clone --depth=1 https://github.com/fj0r/zsh.git $cfg_home/.zshrc.d \
   ; cp $cfg_home/.zshrc.d/_zshrc $cfg_home/.zshrc \
   \
   ; mkdir -p /opt/language-server \
@@ -88,7 +88,7 @@ RUN set -eux \
   \
   ; mkdir $cfg_home/.config \
   ; nvim_home=$cfg_home/.config/nvim \
-  ; git clone --depth=1 https://github.com/murphil/nvim-coc.git $nvim_home \
+  ; git clone --depth=1 https://github.com/fj0r/nvim-coc.git $nvim_home \
   ; NVIM_SETUP_PLUGINS=1 \
     nvim -u $nvim_home/init.vim --headless +'PlugInstall' +qa \
   #; rm -rf $nvim_home/plugged/*/.git \
