@@ -1,4 +1,4 @@
-FROM debian:testing-slim
+FROM fj0rd/io:foundation
 
 ENV LANG=C.UTF-8 LC_ALL=C.UTF-8 TIMEZONE=Asia/Shanghai
 ENV PYTHONUNBUFFERED=x
@@ -20,12 +20,7 @@ RUN set -eux \
   ; apt-get upgrade -y \
   ; DEBIAN_FRONTEND=noninteractive \
     apt-get install -y --no-install-recommends \
-      locales tzdata sudo ca-certificates pwgen \
-      openssh-client openssh-server gnupg rsync \
-      inetutils-ping iproute2 nftables \
-      mlocate htop procps xz-utils zstd zip unzip tree \
-      zsh git curl tcpdump socat jq build-essential \
-      python3 python3-dev python3-pip python3-setuptools ipython3 \
+      gnupg mlocate build-essential \
   \
   ; curl -sL https://deb.nodesource.com/setup_14.x | bash - \
   ; apt-get install -y --no-install-recommends nodejs \
@@ -39,18 +34,6 @@ RUN set -eux \
         typer hydra-core pyyaml invoke fabric \
         cachetools chronyk fn.py \
   \
-  ; ln -sf /usr/share/zoneinfo/$TIMEZONE /etc/localtime \
-  ; echo "$TIMEZONE" > /etc/timezone \
-  ; sed -i /etc/locale.gen \
-        -e 's/# \(en_US.UTF-8 UTF-8\)/\1/' \
-        -e 's/# \(zh_CN.UTF-8 UTF-8\)/\1/' \
-  ; locale-gen \
-  \
-  ; sed -i 's/^.*\(%sudo.*\)ALL$/\1NOPASSWD:ALL/g' /etc/sudoers \
-  ; sed -i /etc/ssh/sshd_config \
-        -e 's!.*\(AuthorizedKeysFile\).*!\1 /etc/authorized_keys/%u!' \
-        -e 's!.*\(GatewayPorts\).*!\1 yes!' \
-        -e 's!.*\(PasswordAuthentication\).*yes!\1 no!' \
   ; apt-get autoremove -y && apt-get clean -y && rm -rf /var/lib/apt/lists/*
 
 RUN set -ex \

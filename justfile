@@ -1,3 +1,10 @@
+foundation:
+    docker build . \
+        -f Dockerfile-foundation \
+        -t fj0rd/io:foundation \
+        --squash
+
+
 cp cfg="~/pub/Configuration":
     rm -rf home
     mkdir -p home/.config/nvim
@@ -35,3 +42,4 @@ login:
         -o UserKnownHostsFile=/dev/null \
         -o IdentitiesOnly=yes \
         root@localhost
+
