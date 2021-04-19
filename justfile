@@ -3,6 +3,7 @@ foundation:
         -f Dockerfile-foundation \
         -t fj0rd/io:foundation \
         --squash
+    docker push fj0rd/io:foundation
 
 
 cp cfg="~/pub/Configuration":
