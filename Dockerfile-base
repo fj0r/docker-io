@@ -11,8 +11,8 @@ RUN set -eux \
       locales tzdata sudo ca-certificates pwgen \
       openssh-client openssh-server rsync \
       lsof inetutils-ping iproute2 nftables \
-      htop procps xz-utils zstd zip unzip tree \
-      zsh git curl tcpdump socat jq \
+      htop procps tree xz-utils zstd zip unzip \
+      zsh git git-flow curl jq tcpdump socat \
       python3 python3-pip ipython3 \
       # python3-dev python3-setuptools \
   \
