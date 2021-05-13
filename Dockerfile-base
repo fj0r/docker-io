@@ -33,4 +33,9 @@ RUN set -eux \
   ; echo "Match Address 10.0.0.0/8,172.17.0.0/16,192.168.0.0/16\n    PasswordAuthentication yes" \
         >> /etc/ssh/sshd_config \
   \
+  ; git config --global pull.rebase false \
+  ; git config --global init.defaultBranch main \
+  ; git config --global user.name "unnamed" \
+  ; git config --global user.email "unnamed@container" \
+  \
   ; apt-get autoremove -y && apt-get clean -y && rm -rf /var/lib/apt/lists/*
