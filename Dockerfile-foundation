@@ -65,15 +65,16 @@ RUN set -eux \
   \
   ; mkdir $cfg_home/.config \
   ; nvim_home=$cfg_home/.config/nvim \
-  ; git clone --depth=1 https://github.com/fj0r/nvim.git $nvim_home \
-  ; NVIM_SETUP_PLUGINS=1 \
-    nvim -u $nvim_home/init.vim --headless +'PlugInstall' +qa \
-  #; rm -rf $nvim_home/plugged/*/.git \
+  ; git clone --recursive --depth=1 https://github.com/fj0r/nvim-lua.git $nvim_home \
+  ; NVIM_BOOTSTRAP=1 \
+    nvim -u $nvim_home/init.vim --headless +'autocmd User PackerComplete sleep 100m | qall' +PackerSync \
+        2>/dev/null || true \
+  #; rm -rf $nvim_home/pack/packer/start/*/.git \
   ; npm install -g pyright \
                    vscode-json-languageserver \
                    yaml-language-server \
-  ; mv $nvim_home/plugged /opt/vim \
-  ; ln -sf /opt/vim/plugged $nvim_home \
+  ; mv $nvim_home/pack /opt/vim \
+  ; ln -sf /opt/vim/pack $nvim_home \
   \
   ; coc_lua_bin_repo=josa42/coc-lua-binaries \
   ; lua_ls_ver=$(curl -sSL -H "'$github_header'" $github_api/${coc_lua_bin_repo}/releases | jq -r '.[0].tag_name') \
