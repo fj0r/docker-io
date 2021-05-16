@@ -56,7 +56,6 @@ RUN set -eux \
         requests cachetools chronyk fn.py \
   \
   ; cfg_home=/etc/skel \
-  ; mkdir $cfg_home/.zshrc.d \
   ; git clone --depth=1 https://github.com/fj0r/zsh.git $cfg_home/.zshrc.d \
   ; cp $cfg_home/.zshrc.d/_zshrc $cfg_home/.zshrc \
   \
@@ -66,10 +65,10 @@ RUN set -eux \
   ; mkdir $cfg_home/.config \
   ; nvim_home=$cfg_home/.config/nvim \
   ; git clone --recursive --depth=1 https://github.com/fj0r/nvim-lua.git $nvim_home \
+  ; ln -sf $cfg_home/.* /root \
+  \
   ; NVIM_BOOTSTRAP=1 \
-    nvim -u $nvim_home/init.lua --headless \
-    +'autocmd User PackerComplete quitall' \
-    +'lua require("packer").sync()' \
+    nvim --headless +'autocmd User PackerComplete quitall' +'lua require("packer").sync()' \
   #; rm -rf $nvim_home/pack/packer/start/*/.git \
   ; npm install -g pyright \
                    vscode-json-languageserver \
