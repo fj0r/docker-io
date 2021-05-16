@@ -105,20 +105,11 @@ set_user () {
         _GID=${UA[2]:-1000}
 
         getent group ${_NAME} >/dev/null 2>&1 || groupadd -g ${_GID} ${_NAME}
-        getent passwd ${_NAME} >/dev/null 2>&1 || useradd -m -u ${_UID} -g ${_GID} -G sudo -s /bin/zsh -c 'Engineer' ${_NAME}
-    else
-        cp -r /etc/skel/. /root
+        getent passwd ${_NAME} >/dev/null 2>&1 || useradd -m -u ${_UID} -g ${_GID} -G sudo -s /bin/zsh -c 'Developer' ${_NAME}
     fi
 }
 
-if [ -z $1 ]; then
-    set_user
-    if [ -n "${user}" ]; then
-        su ${_NAME}
-    else
-        exec /bin/zsh
-    fi
-elif [[ $1 == "$DAEMON" ]]; then
+if [[ $1 == "$DAEMON" ]]; then
     trap stop SIGINT SIGTERM
     init
     /usr/sbin/sshd -D -e &
@@ -126,6 +117,16 @@ elif [[ $1 == "$DAEMON" ]]; then
     mkdir -p /var/run/$DAEMON && echo "${pid}" > /var/run/$DAEMON/$DAEMON.pid
     wait "${pid}" && exit $?
 else
+    if [ -z $1 ]; then
+        CMD="/bin/zsh"
+    else
+        CMD="$@"
+    fi
     set_user
-    exec "$@"
+    if [ -n "${user}" ]; then
+        #su - ${_NAME} -c "${CMD}"
+        sudo -u ${_NAME} "${CMD}"
+    else
+        exec "${CMD}"
+    fi
 fi
