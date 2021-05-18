@@ -68,7 +68,7 @@ RUN set -eux \
   ; ln -sf $cfg_home/.config $cfg_home/.zshrc* /root \
   \
   ; NVIM_BOOTSTRAP=1 \
-    nvim --headless +'autocmd User PackerComplete quitall' +'lua require("packer").sync()' \
+    nvim --headless +'autocmd User PackerComplete ++once sleep 300 | quitall' +'lua require("packer").sync()' \
   #; rm -rf $nvim_home/pack/packer/start/*/.git \
   ; npm install -g pyright \
                    vscode-json-languageserver \
