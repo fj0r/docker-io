@@ -73,6 +73,7 @@ RUN set -eux \
   ; npm install -g pyright \
                    vscode-json-languageserver \
                    yaml-language-server \
+  ; sed -i "s/\(exports.KUBERNETES_SCHEMA_URL = \)\(.*\)$/\1process.env['KUBERNETES_SCHEMA_URL'] || \2/" $(dirname $(which yaml-language-server))/../lib/node_modules/yaml-language-server/out/server/src/languageservice/utils/schemaUrls.js \
   ; mv $nvim_home/pack /opt/vim \
   ; ln -sf /opt/vim/pack $nvim_home \
   \
