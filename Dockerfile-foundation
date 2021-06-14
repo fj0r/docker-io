@@ -40,6 +40,7 @@ RUN set -eux \
   ; wasmtime_ver=$(curl -sSL -H "'$github_header'" $github_api/${wasmtime_repo}/releases | jq -r '[.[]|select(.prerelease == false)][0].tag_name') \
   ; wasmtime_url=https://github.com/${wasmtime_repo}/releases/download/${wasmtime_ver}/wasmtime-${wasmtime_ver}-x86_64-linux.tar.xz \
   ; curl -sSL ${wasmtime_url} | tar Jxf - --strip-components=1 -C /usr/local/bin wasmtime-${wasmtime_ver}-x86_64-linux/wasmtime
+  #; find /usr/local/bin -type f -exec grep -IL . "{}" \; | xargs -L 1 strip
 
 RUN set -eux \
   ; curl -sL https://deb.nodesource.com/setup_16.x | bash - \
@@ -48,6 +49,7 @@ RUN set -eux \
   ; nvim_ver=$(curl -sSL -H "'$github_header'" $github_api/${nvim_repo}/releases | jq -r '.[0].tag_name') \
   ; nvim_url=https://github.com/${nvim_repo}/releases/download/${nvim_ver}/nvim-linux64.tar.gz \
   ; curl -sSL ${nvim_url} | tar zxf - -C /usr/local --strip-components=1 \
+  #; strip /usr/local/bin/nvim \
   ; pip3 --no-cache-dir install \
         neovim neovim-remote debugpy \
         # aiohttp aiofile fastapi uvicorn fabric \
