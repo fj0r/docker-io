@@ -1,9 +1,10 @@
 base:
     docker build . \
-        -f Dockerfile-base \
-        -t fj0rd/io:base \
-        --squash
-    docker push fj0rd/io:base
+        -f Dockerfile-os \
+        -t fj0rd/io:os \
+        --squash \
+        --progress plain
+    docker push fj0rd/io:os
 
 
 cp cfg="~/pub/Configuration":

@@ -1,6 +1,5 @@
-FROM debian:testing-slim
+FROM fj0rd/io:os
 
-ENV LANG=C.UTF-8 LC_ALL=C.UTF-8 TIMEZONE=Asia/Shanghai
 ENV PYTHONUNBUFFERED=x
 
 RUN set -eux \
@@ -8,20 +7,13 @@ RUN set -eux \
   ; apt-get upgrade -y \
   ; DEBIAN_FRONTEND=noninteractive \
     apt-get install -y --no-install-recommends \
-      locales tzdata sudo ca-certificates pwgen \
+      sudo pwgen \
       openssh-client openssh-server rsync \
       lsof inetutils-ping iproute2 nftables \
       htop procps tree xz-utils zstd zip unzip \
       zsh git git-flow curl jq tcpdump socat \
       python3 python3-pip ipython3 \
       # python3-dev python3-setuptools \
-  \
-  ; ln -sf /usr/share/zoneinfo/$TIMEZONE /etc/localtime \
-  ; echo "$TIMEZONE" > /etc/timezone \
-  ; sed -i /etc/locale.gen \
-        -e 's/# \(en_US.UTF-8 UTF-8\)/\1/' \
-        -e 's/# \(zh_CN.UTF-8 UTF-8\)/\1/' \
-  ; locale-gen \
   \
   ; sed -i 's/^.*\(%sudo.*\)ALL$/\1NOPASSWD:ALL/g' /etc/sudoers \
   \
