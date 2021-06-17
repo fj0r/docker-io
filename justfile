@@ -44,3 +44,5 @@ login:
         -o IdentitiesOnly=yes \
         root@localhost
 
+upgrade:
+    docker build . -f Dockerfile-upgrade -t debian:testing-slim --squash --progress plain
