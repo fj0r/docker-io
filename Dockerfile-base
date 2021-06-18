@@ -2,7 +2,7 @@ FROM fj0rd/io:os
 
 ENV PYTHONUNBUFFERED=x
 
-RUN set -eux \
+RUN set -Eeuxo pipefail \
   ; apt-get update \
   ; apt-get upgrade -y \
   ; DEBIAN_FRONTEND=noninteractive \

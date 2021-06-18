@@ -12,7 +12,7 @@ ARG rg_repo=BurntSushi/ripgrep
 ARG github_header="Accept: application/vnd.github.v3+json"
 ARG github_api=https://api.github.com/repos
 
-RUN set -eux \
+RUN set -Eeuxo pipefail \
   ; rg_ver=$(curl -sSL -H "'$github_header'" $github_api/${rg_repo}/releases | jq -r '.[0].tag_name') \
   ; rg_url=https://github.com/${rg_repo}/releases/download/${rg_ver}/ripgrep-${rg_ver}-x86_64-unknown-linux-musl.tar.gz \
   ; curl -sSL ${rg_url} | tar zxf - -C /usr/local/bin --strip-components=1 ripgrep-${rg_ver}-x86_64-unknown-linux-musl/rg \
@@ -42,7 +42,7 @@ RUN set -eux \
   ; curl -sSL ${wasmtime_url} | tar Jxf - --strip-components=1 -C /usr/local/bin wasmtime-${wasmtime_ver}-x86_64-linux/wasmtime
   #; find /usr/local/bin -type f -exec grep -IL . "{}" \; | xargs -L 1 strip
 
-RUN set -eux \
+RUN set -Eeuxo pipefail \
   ; curl -sL https://deb.nodesource.com/setup_16.x | bash - \
   ; apt-get install -y --no-install-recommends nodejs build-essential \
   \
