@@ -1,4 +1,5 @@
-FROM fj0rd/io:base
+ARG REPO=fj0rd
+FROM ${REPO}/io:base
 
 ARG nvim_repo=neovim/neovim
 ARG wasmtime_repo=bytecodealliance/wasmtime

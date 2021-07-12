@@ -1,4 +1,5 @@
-FROM fj0rd/io:foundation
+ARG REPO=fj0rd
+FROM ${REPO}/io:foundation
 
 RUN set -eux \
   ; apt-get update \
