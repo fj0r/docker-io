@@ -1,5 +1,4 @@
-ARG REPO=fj0rd
-FROM ${REPO}/io:base
+FROM fj0rd/io:base
 
 ARG nvim_repo=neovim/neovim
 ARG nvim_config=fj0r/nvim-lua
