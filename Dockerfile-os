@@ -6,8 +6,7 @@ RUN set -eux \
   ; apt-get update \
   ; apt-get upgrade -y \
   ; DEBIAN_FRONTEND=noninteractive \
-    apt-get install -y --no-install-recommends \
-      tzdata ca-certificates \
+    apt-get install -y --no-install-recommends tzdata \
   \
   ; ln -sf /usr/share/zoneinfo/$TIMEZONE /etc/localtime \
   ; echo "$TIMEZONE" > /etc/timezone \
